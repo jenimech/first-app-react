@@ -46,16 +46,23 @@ class App extends Component {
     console.log(item);
     this.setState({seleccionada: item})
   }
+  
+  cleanArray = ( actual ) => {
+    var newArray = new Array();
+    for( var i = 0, j = actual.length; i < j; i++ ){
+        if ( actual[ i ] ){
+          newArray.push( actual[ i ] );
+      }
+    }
+    return newArray;
+  }
 
   delete = (item) => {
     console.log('delete action app.js')
     this.setState((oldState) => {
       const position = oldState.chucherias.indexOf(item);
       delete oldState.chucherias[position];
-      const newList = oldState.chucherias.map((item) => {
-        if(item !== undefined)
-         return item
-      })
+      const newList = this.cleanArray(oldState.chucherias)
       console.log('new list: ', newList);
       return {
         chucherias: newList
